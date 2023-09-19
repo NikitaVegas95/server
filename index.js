@@ -32,6 +32,6 @@ appServer.listen(7412, (err) => {
 });
 
 
-app.get('/home', (req, res) => {
+appServer.get('/home', (req, res) => {
   res.status(200).json('Welcome, your app is working well');
 })
