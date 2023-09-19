@@ -31,3 +31,7 @@ appServer.listen(7412, (err) => {
   console.log('Server OK');
 });
 
+
+app.get('/home', (req, res) => {
+  res.status(200).json('Welcome, your app is working well');
+})
