@@ -28,7 +28,7 @@ appServer.post('/task',checkUser, taskValidation, taskController.create)
 appServer.delete('/task/:id',checkUser, taskController.remove)
 appServer.patch('/task/:id', taskController.update)
 
-appServer.listen(7412, (err) => {
+appServer.listen('https://school48-vite.vercel.app', (err) => {
   if (err) {
     return console.log(err);
   }
@@ -36,6 +36,6 @@ appServer.listen(7412, (err) => {
 });
 
 
-appServer.get('/home', (req, res) => {
+appServer.get('/', (req, res) => {
   res.status(200).json('Welcome, your app is working well');
 })
