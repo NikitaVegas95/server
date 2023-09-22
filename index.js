@@ -34,8 +34,3 @@ appServer.listen('https://school48-vite.vercel.app', (err) => {
   }
   console.log('Server OK');
 });
-
-
-appServer.get('/', (req, res) => {
-  res.status(200).json('Welcome, your app is working well');
-})
