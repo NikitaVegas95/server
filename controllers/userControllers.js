@@ -10,12 +10,12 @@ export const register = async (req, res) => {
             return res.status(400).json(errors.array())
         }
 
-        const password = req.body.password
+        const password = req.body.password.trim()
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(password, salt)
 
         const doc = new UserModel({
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             fullName: req.body.fullName,
             avatarUrl: req.body.avatarUrl,
             passwordHash: hash,
@@ -47,7 +47,7 @@ export const register = async (req, res) => {
 }
 export const login = async (req, res) =>{
     try {
-        const user = await UserModel.findOne({ email: req.body.email })
+        const user = await UserModel.findOne({ email: req.body.email.toLowerCase().trim() })
 
         if (!user) {
             return res.status(404).json({
@@ -55,7 +55,7 @@ export const login = async (req, res) =>{
             })
         }
 
-        const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash)
+        const isValidPass = await bcrypt.compare(req.body.password.trim(), user._doc.passwordHash)
 
         if (!isValidPass) {
             return res.status(400).json({
