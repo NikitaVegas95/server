@@ -9,7 +9,7 @@ import cors from "cors";
 export const appServer = express();
 appServer.use(express.json());
 appServer.use(cors({
-  origin: ["https://school48-vite.vercel.app/"],
+  origin: ["https://school48-vite.vercel.app"],
   methods: ["POST", "GET"],
   credentials: true
 }));
@@ -28,7 +28,7 @@ appServer.post('/task/create',checkUser, taskValidation, taskController.create)
 appServer.post('/task',checkUser, taskValidation, taskController.create)
 appServer.delete('/task/:id',checkUser, taskController.remove)
 appServer.patch('/task/:id', taskController.update)
-appServer.listen('https://school48-vite.vercel.app/', (err) => {
+appServer.listen('https://school48-vite.vercel.app', (err) => {
   if (err) {
     return console.log(err);
   }
