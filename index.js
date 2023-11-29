@@ -5,11 +5,9 @@ import checkUser from './utils/checkUser.js'
 import * as userController from "./controllers/userControllers.js";
 import * as taskController from "./controllers/taskControllers.js";
 import cors from "cors";
-import * as path from "path";
 
 export const appServer = express();
-// appServer.use(express.json());
-appServer.use(express.static(path.join(__dirname, 'build')));
+appServer.use(express.json());
 appServer.use(cors({
   origin: ["https://school48-vite.vercel.app"],
   methods: ["POST", "GET"],
@@ -22,11 +20,8 @@ mongoose.connect('mongodb+srv://nikitavegas95:7412@cluster0.kyp5gki.mongodb.net/
 
 appServer.post('/', loginValidation, userController.login)
 appServer.post('/registration', registrationValidation, userController.register)
-appServer.get('/auth/me', checkUser, userController.getMe)
-appServer.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
 
+appServer.get('/auth/me', checkUser, userController.getMe)
 appServer.get('/tasks', taskController.getAll)
 appServer.get('/task/:id', taskController.getOne)
 appServer.post('/task/create',checkUser, taskValidation, taskController.create)
