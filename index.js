@@ -21,6 +21,10 @@ mongoose.connect('mongodb+srv://nikitavegas95:7412@cluster0.kyp5gki.mongodb.net/
 appServer.post('/', loginValidation, userController.login)
 appServer.post('/registration', registrationValidation, userController.register)
 
+appServer.get('/', function (req, res) {
+  res.render('index.html')
+})
+
 appServer.get('/auth/me', checkUser, userController.getMe)
 appServer.get('/tasks', taskController.getAll)
 appServer.get('/task/:id', taskController.getOne)
